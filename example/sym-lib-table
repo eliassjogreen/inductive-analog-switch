@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name "Switch_Inductive_Analog")(type "KiCad")(uri "${KICAD6_SYMBOL_DIR}/Switch_Inductive_Analog.kicad_sym")(options "")(descr ""))
+)
