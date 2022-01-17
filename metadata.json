@@ -1,0 +1,37 @@
+{
+  "$schema": "https://go.kicad.org/pcm/schemas/v1",
+  "name": "Inductive Analog Switch",
+  "description": "An KiCad library for inductive analog keyboard switches",
+  "description_full": "This library contains footprints and symbols for inductive analog keyboard switches for use with the Texas Instruments LDC1312, LDC1314, LDC1312 and LDC1314 inductance to digital converters.\nSupported footprints for switches are currently PCB or plate mounted, LED or no LED Cherry MX, Alps Matias or hybrid Cherry MX and Alps Matias.",
+  "identifier": "com.github.eliassjogreen.inductive-analog-switch",
+  "type": "library",
+  "author": {
+    "name": "Elias Sjögreen (eliassjogreen)",
+    "contact": {
+      "email": "eliassjogreen1@gmail.com"
+    }
+  },
+  "license": "CC-BY-SA-4.0",
+  "resources": {
+    "Github": "https://github.com/eliassjogreen/inductive-analog-switch"
+  },
+  "tags": [
+    "footprint",
+    "footprints",
+    "symbol",
+    "symbols",
+    "library",
+    "keyswitch",
+    "switch",
+    "keyboard",
+    "linear",
+    "analog"
+  ],
+  "versions": [
+    {
+      "version": "0.1.0",
+      "status": "stable",
+      "kicad_version": "6.0"
+    }
+  ]
+}
