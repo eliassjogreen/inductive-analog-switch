@@ -1,8 +1,8 @@
 # Inductive Analog Switches
 
 This library contains footprints and symbols for inductive analog keyboard
-switches for use with the Texas Instruments LDC1312, LDC1314, LDC1312 and
-LDC1314 inductance to digital converters.
+switches for use with the Texas Instruments LDC1312, LDC1314, LDC1612 and
+LDC1614 inductance to digital converters.
 
 Supported footprints for switches are currently PCB or plate mounted, LED or no
 LED Cherry MX, Alps Matias or hybrid Cherry MX and Alps Matias.
