@@ -158,6 +158,7 @@ cython_debug/
 *.kicad_pcb-bak
 *.kicad_sch-bak
 *-backups
+*-gerbers
 *.kicad_prl
 *.sch-bak
 *~

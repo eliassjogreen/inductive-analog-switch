@@ -1,3 +1,0 @@
-(fp_lib_table
-  (lib (name "Button_Switch_Keyboard_Inductive")(type "KiCad")(uri "${KIPRJMOD}/../footprints/Button_Switch_Keyboard_Inductive.pretty")(options "")(descr ""))
-)
