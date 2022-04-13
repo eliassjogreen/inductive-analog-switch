@@ -2,36 +2,12 @@ import argparse
 import json
 import os
 import hashlib
+from typing import Iterable
 from zipfile import ZipFile
 
-parser = argparse.ArgumentParser(description="Package the KiCad package")
 
-parser.add_argument(
-    "metadata",
-    type=str,
-    nargs="?",
-    default="metadata.json",
-    help="the metadata json file",
-)
-parser.add_argument(
-    "path",
-    type=str,
-    nargs="?",
-    default="output",
-    help="target path of the package",
-)
-parser.add_argument(
-    "content",
-    type=str,
-    nargs="*",
-    default=["footprints/", "resources/", "symbols/", "metadata.json"],
-    help="the content of the packaged archive",
-)
-
-args = parser.parse_args()
-
-if __name__ == "__main__":
-  with open(args.metadata, "r+") as metadata_file:
+def package(metadata: str, path: str, content: Iterable[str]):
+  with open(metadata, "r+") as metadata_file:
     metadata = json.load(metadata_file)
 
     name = metadata["name"].replace(" ", "_")
@@ -39,17 +15,17 @@ if __name__ == "__main__":
     github = metadata["resources"]["github"]
 
     archive_file = f"{name}-{version}.zip"
-    archive_path = os.path.join(args.path, archive_file)
+    archive_path = os.path.join(path, archive_file)
     download_url = f"{github}/releases/download/{version}/{archive_file}"
 
-    if not os.path.isdir(args.path):
-      os.mkdir(args.path)
+    if not os.path.isdir(path):
+      os.mkdir(path)
 
     install_size = 0
 
     # Write archive
     with ZipFile(archive_path, "w") as archive:
-      for entry in args.content:
+      for entry in content:
         install_size += os.path.getsize(entry)
 
         if os.path.isdir(entry):
@@ -70,8 +46,39 @@ if __name__ == "__main__":
 
     metadata["versions"][0]["download_sha256"] = download_sha256
     metadata["versions"][0]["download_size"] = download_size
+    metadata["versions"][0]["download_url"] = download_url
     metadata["versions"][0]["install_size"] = install_size
 
     metadata_file.seek(0)
     metadata_file.truncate()
     json.dump(metadata, metadata_file, ensure_ascii=False, indent=2)
+
+
+if __name__ == "__main__":
+  parser = argparse.ArgumentParser(description="Package the KiCad package")
+
+  parser.add_argument(
+      "metadata",
+      type=str,
+      nargs="?",
+      default="metadata.json",
+      help="the metadata json file",
+  )
+  parser.add_argument(
+      "path",
+      type=str,
+      nargs="?",
+      default="output",
+      help="target path of the package",
+  )
+  parser.add_argument(
+      "content",
+      type=str,
+      nargs="*",
+      default=["footprints/", "resources/", "symbols/", "metadata.json"],
+      help="the content of the packaged archive",
+  )
+
+  args = parser.parse_args()
+
+  package(args.metadata, args.path, args.content)

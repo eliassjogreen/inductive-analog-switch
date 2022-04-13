@@ -13,43 +13,6 @@ from nodes.switch import (
 import argparse
 
 
-def str2leds(v):
-  if isinstance(v, bool):
-    return v
-  if v.lower() in ("yes", "true", "t", "y", "1"):
-    return True
-  elif v.lower() in ("no", "false", "f", "n", "0"):
-    return False
-  elif v.lower() in ("both", "b"):
-    return "Both"
-  else:
-    raise argparse.ArgumentTypeError("Boolean or both value expected.")
-
-
-parser = argparse.ArgumentParser(description="Generate footprints")
-
-parser.add_argument(
-    "path",
-    type=str,
-    nargs="?",
-    default="footprints/Button_Switch_Keyboard_Inductive.pretty",
-    help="target path of the footprints",
-)
-parser.add_argument("--leds",
-                    type=str2leds,
-                    choices=[True, False, "Both"],
-                    nargs="?",
-                    default="Both")
-parser.add_argument(
-    "--switch-types",
-    type=str,
-    nargs="?",
-    default="Both",
-)
-
-args = parser.parse_args()
-
-
 def generate(
     path: str,
     leds: bool | Literal["Both"] = "Both",
@@ -85,4 +48,40 @@ def generate(
 
 
 if __name__ == "__main__":
+
+  def str2leds(v):
+    if isinstance(v, bool):
+      return v
+    if v.lower() in ("yes", "true", "t", "y", "1"):
+      return True
+    elif v.lower() in ("no", "false", "f", "n", "0"):
+      return False
+    elif v.lower() in ("both", "b"):
+      return "Both"
+    else:
+      raise argparse.ArgumentTypeError("Boolean or both value expected.")
+
+  parser = argparse.ArgumentParser(description="Generate footprints")
+
+  parser.add_argument(
+      "path",
+      type=str,
+      nargs="?",
+      default="footprints/Button_Switch_Keyboard_Inductive.pretty",
+      help="target path of the footprints",
+  )
+  parser.add_argument("--leds",
+                      type=str2leds,
+                      choices=[True, False, "Both"],
+                      nargs="?",
+                      default="Both")
+  parser.add_argument(
+      "--switch-types",
+      type=str,
+      nargs="?",
+      default="Both",
+  )
+
+  args = parser.parse_args()
+
   generate(args.path, args.leds, args.switch_types)

@@ -182,4 +182,4 @@ fp-info-cache
 *.zip
 *_info.txt
 release/
-output
+output/
